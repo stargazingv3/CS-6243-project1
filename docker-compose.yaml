@@ -1,0 +1,44 @@
+services:
+  cs6243:
+    build: .
+    container_name: dev_container
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    shm_size: '8g'
+    # Run the container as the current host user to avoid file permission issues
+    user: "${UID}:${GID}"
+    # Keep STDIN open and allocate a pseudo-TTY, making the container interactive
+    stdin_open: true
+    tty: true
+    ports:
+     - "8000:8000"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  jupyter-server:
+      build: .
+      container_name: jupyter_server_container
+      env_file:
+        - .env
+      volumes:
+        - .:/app
+      shm_size: '8g'
+      user: "${UID}:${GID}"
+      ports:
+        - "8888:8888"
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: all
+                capabilities: [gpu]
+      command: >
+        jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser

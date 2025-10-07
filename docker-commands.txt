@@ -1,0 +1,6 @@
+Build the initial containers: docker compose build
+Run the container as an interactive dev environment: docker compose run --rm cs6243
+Run a command detached: docker compose run --rm --service-ports cs6243 python main.py
+Stop and Cleanup: docker compose down (or just ctrl +c)
+Run the container's jupyter notebook: docker compose up -d jupyter-server
+View logs of the running container: docker compose logs -f jupyter-server
