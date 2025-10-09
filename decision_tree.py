@@ -148,8 +148,8 @@ def fit_tree(X, y, depth=0, max_depth=None, split_features=[]):
     if thr:
         DEBUG("numerical data recursion")
         node.branches = {
-            "<=": fit_tree(np.array([X[i] for i in splits[0]]), np.array([y[i] for i in splits[0]]), depth+1, max_depth, split_features+[feat]),
-            ">":  fit_tree(np.array([X[i] for i in splits[1]]), np.array([y[i] for i in splits[1]]), depth+1, max_depth, split_features+[feat])
+            "<=": fit_tree(np.array([X[i] for i in splits[0]]), np.array([y[i] for i in splits[0]]), depth+1, max_depth, split_features),
+            ">":  fit_tree(np.array([X[i] for i in splits[1]]), np.array([y[i] for i in splits[1]]), depth+1, max_depth, split_features)
         }
     else:
         DEBUG("categorical data recursion")
@@ -194,13 +194,13 @@ def plot_tree(node, attr, depth=0):
 
 # Test with toy dataset
 if __name__ == "__main__":
-    X = np.loadtxt("play_tennis_toy.csv", delimiter=",", skiprows=0, dtype=object)[:,1:]
-    AttributeNames = X[0]
-    X = X[1:,:]
-    y = np.where(X[:, -1] == "Yes", 1, 0)
-
-    X = X[:, :-1]
-    AttributeNames = AttributeNames[:-1]
+    filepath = "./data/example.csv"
+    with open(filepath, 'r') as f:
+        header = f.readline().strip().split(',')
+    rawdata = np.loadtxt(filepath, delimiter=",", skiprows=1, dtype=object)
+    y = rawdata[:, -1]
+    X = rawdata[:, :-1]
+    AttributeNames = np.array(header[:-1])
 
     DEBUG(AttributeNames)
     DEBUG(X)
