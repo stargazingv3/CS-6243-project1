@@ -19,11 +19,11 @@ def entropy(y):
     # ex. -.1*log2(.1) - .9*log2(.9)
     if len(y) == 0:
         return 0
-    px = len([x for x in y if x == 1]) / len(y)
-    if px == 0 or 1-px == 0:
-        return 0
-    e = -px*math.log2(px) - (1-px)*math.log2(1-px)
-    return e
+
+    _, counts = np.unique(y, return_counts=True)
+    probabilities = counts / len(y)
+    probabilities = probabilities[probabilities > 0]
+    return -np.sum(probabilities * np.log2(probabilities))
 
 def information_gain(y, splits):
     # Calculate Information Gain, given a distribution y and a set of indicies splits
