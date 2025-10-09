@@ -207,6 +207,6 @@ if __name__ == "__main__":
     DEBUG(y)
     tree = fit_tree(X, y, max_depth=3)
     y_pred = predict(tree, X)
-    print("Predictions:", y_pred)
+    # print("Predictions:", y_pred)
     print("Accuracy:", np.mean(y_pred == y))
     plot_tree(tree, AttributeNames)
