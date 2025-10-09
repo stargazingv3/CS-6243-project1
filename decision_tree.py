@@ -33,7 +33,7 @@ def information_gain(y, splits):
     y_splits = [ [] for i in range(len(splits)) ]
     for i in range(len(splits)):
         for index in splits[i]:
-            y_splits[i].append(int(y[index]))
+            y_splits[i].append(float(y[index]))
     children_entropy = 0
     for y_split in y_splits:
         children_entropy += (len(y_split) / sum([len(x) for x in y_splits])) * entropy(y_split)
@@ -69,7 +69,7 @@ def best_split(X, y, split_features):
         thresh = None
         splits = None
         try: # NUMERICAL DATA
-            col = col.astype(int)
+            col = col.astype(float)
             values = list(set(col.tolist()))
             values.sort()
             DEBUG("values are", values)
@@ -163,7 +163,7 @@ def fit_tree(X, y, depth=0, max_depth=None, split_features=[]):
 def predict_one(node, x):
     while not node.is_leaf:
         if node.threshold is not None:
-            v = int(x[AttributeNames.tolist().index(node.feature)])
+            v = float(x[AttributeNames.tolist().index(node.feature)])
             key = "<=" if v <= node.threshold else ">"
         else:
             key = x[AttributeNames.tolist().index(node.feature)]
