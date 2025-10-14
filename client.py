@@ -3,19 +3,23 @@ import csv
 import json
 import socket
 import struct
+import numpy as np
 from collections import Counter
 from pathlib import Path
 from typing import Dict, List, Optional
 
+# --- Hardcoded Model Import ---
+from knn import KNN
+
+# CLIENT.PY LOGIC #
+###################
 
 Message = Dict[str, object]
-
 
 def send_message(conn: socket.socket, message: Message) -> None:
     payload = json.dumps(message).encode("utf-8")
     header = struct.pack("!I", len(payload))
     conn.sendall(header + payload)
-
 
 def _recv_exact(conn: socket.socket, num_bytes: int) -> Optional[bytes]:
     buffer = bytearray()
@@ -25,7 +29,6 @@ def _recv_exact(conn: socket.socket, num_bytes: int) -> Optional[bytes]:
             return None
         buffer.extend(chunk)
     return bytes(buffer)
-
 
 def receive_message(conn: socket.socket) -> Optional[Message]:
     header = _recv_exact(conn, 4)
@@ -44,10 +47,13 @@ class FederatedClient:
         self.port = port
         self.dataset_path = dataset_path
         self.client_id: Optional[int] = None
-        self.train_features: List[List[float]] = []
-        self.train_labels: List[str] = []
-        self.majority_label: Optional[str] = None
         self.dataset_payload: Optional[Dict[str, List]] = None
+        
+        # --- Model Instantiation ---
+        self.model = KNN(k=5)
+        print(f"Using model: {self.model.__class__.__name__}")
+        
+        self.fallback_label: Optional[str] = None
 
     def run(self) -> None:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -94,71 +100,37 @@ class FederatedClient:
         path = self.dataset_path
         if path is None:
             return {"features": features, "labels": labels}
-        if not path.exists():
-            raise FileNotFoundError(f"Dataset file {path} does not exist")
 
         with path.open("r", newline="") as handle:
             reader = csv.reader(handle)
-            header_row_index = 0
-            header: Optional[List[str]] = None
-            for row_index, row in enumerate(reader, start=1):
-                if not row or row[0].startswith("#"):
-                    continue
-                header = row
-                header_row_index = row_index
-                break
-
-            if header is None:
-                raise ValueError("Dataset is empty or only contains comments")
-            feature_count = len(header) - 1
-            if feature_count < 1:
-                raise ValueError("Dataset must include at least one attribute column before the class column")
-
-            for row_index, row in enumerate(reader, start=header_row_index + 1):
-                if not row or row[0].startswith("#"):
-                    continue
-                if len(row) != len(header):
-                    raise ValueError(f"Row {row_index} has {len(row)} columns; expected {len(header)} based on header")
-                try:
-                    feature_values = [float(value) for value in row[:-1]]
-                except ValueError:
-                    raise ValueError(f"Row {row_index} contains non numeric feature values") from None
-
+            next(reader, None)  # Skip header
+            for row in reader:
+                feature_values = [float(value) for value in row[:-1]]
                 label = row[-1].strip()
-                if not label:
-                    raise ValueError(f"Row {row_index} has an empty class label")
-
-                features.append(feature_values)
-                labels.append(label)
-
-        if not features:
-            raise ValueError("Dataset is empty after parsing")
-        if len(features) > 1000:
-            raise ValueError("Dataset exceeds 1000 samples")
-        if len(set(labels)) > 5:
-            raise ValueError("Dataset exceeds 5 classes")
-
+                if label:
+                    features.append(feature_values)
+                    labels.append(label)
         return {"features": features, "labels": labels}
+        
     def _handle_train_data(self, payload: Dict[str, List]) -> None:
-        self.train_features = payload.get("features", [])
-        self.train_labels = payload.get("labels", [])
-        if not self.train_features:
-            print("Received empty training dataset")
-            return
-        label_counts = Counter(self.train_labels)
-        self.majority_label = label_counts.most_common(1)[0][0]
-        print(
-            "Training data received. Samples: "
-            f"{len(self.train_features)}, classes: {len(label_counts)}"
-        )
-        # TODO: Replace majority-class placeholder with an actual classifier implementation.
+        features = payload.get("features", [])
+        labels = payload.get("labels", [])
+
+        print(f"Training data received. Samples: {len(features)}")
+        
+        X_train_np = np.array(features)
+        y_train_np = np.array(labels).astype(float)
+
+        self.model.train(X_train_np, y_train_np)
+        
+        self.fallback_label = str(Counter(y_train_np).most_common(1)[0][0])
 
     def _predict(self, payload: Dict[str, object]) -> str:
-        # TODO: Replace placeholder logic with inference from the trained classifier.
-        if self.majority_label is not None:
-            return self.majority_label
-        return "unknown"
-
+        features_to_predict = payload.get("features")
+        x_test_np = np.array(features_to_predict)
+        
+        prediction = self.model.predict(x_test_np)
+        return str(prediction)
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Federated classification demo client")
@@ -172,15 +144,17 @@ def parse_args() -> argparse.Namespace:
     )
     return parser.parse_args()
 
-
 def main() -> None:
     args = parse_args()
-    client = FederatedClient(host=args.host, port=args.port, dataset_path=args.dataset)
+    client = FederatedClient(
+        host=args.host,
+        port=args.port,
+        dataset_path=args.dataset,
+    )
     try:
         client.run()
     except KeyboardInterrupt:
         print("Client interrupted by user")
-
 
 if __name__ == "__main__":
     main()

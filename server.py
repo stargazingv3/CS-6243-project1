@@ -223,6 +223,7 @@ class FederatedServer:
 
             self._visualize_predictions(features, true_label, predictions)
             remaining = self.rounds - round_index
+            print("true_label was", true_label)
             input(f"Press Enter to continue (remaining rounds: {remaining})...")
 
     def _visualize_predictions(

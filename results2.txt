@@ -1,0 +1,387 @@
+--- Starting Model Tournament ---
+
+--- Testing on Dataset: checker_2class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 0.01}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.5257
+     Eval Accuracy:  0.4733
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.8014
+     Eval Accuracy:  0.4800
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.6729
+     Eval Accuracy:  0.5100
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.5586
+     Eval Accuracy:  0.5133
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.5300
+     Eval Accuracy:  0.4700
+
+--- Testing on Dataset: checker_3class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 0.1, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.3629
+     Eval Accuracy:  0.3400
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.7157
+     Eval Accuracy:  0.3600
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7229
+     Eval Accuracy:  0.3167
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.4429
+     Eval Accuracy:  0.3300
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.4086
+     Eval Accuracy:  0.3067
+
+--- Testing on Dataset: checker_4class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8043
+     Eval Accuracy:  0.2967
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.6986
+     Eval Accuracy:  0.2100
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.6714
+     Eval Accuracy:  0.3200
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.3443
+     Eval Accuracy:  0.2000
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.4100
+     Eval Accuracy:  0.2633
+
+--- Testing on Dataset: checker_5class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 10, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.7200
+     Eval Accuracy:  0.3300
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.6386
+     Eval Accuracy:  0.2300
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7071
+     Eval Accuracy:  0.3167
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.3443
+     Eval Accuracy:  0.2133
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3457
+     Eval Accuracy:  0.2267
+
+--- Testing on Dataset: rotated_2class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 0.1}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.5557
+     Eval Accuracy:  0.5067
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.8043
+     Eval Accuracy:  0.4700
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.6814
+     Eval Accuracy:  0.4733
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.5771
+     Eval Accuracy:  0.4933
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.5671
+     Eval Accuracy:  0.4933
+
+--- Testing on Dataset: rotated_3class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 10, 'gamma': 0.1}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.4143
+     Eval Accuracy:  0.2900
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.7286
+     Eval Accuracy:  0.3533
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7086
+     Eval Accuracy:  0.3767
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.4471
+     Eval Accuracy:  0.3167
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.4471
+     Eval Accuracy:  0.3167
+
+--- Testing on Dataset: rotated_4class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 0.1, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.2929
+     Eval Accuracy:  0.2633
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.6557
+     Eval Accuracy:  0.2600
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.6443
+     Eval Accuracy:  0.2567
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.3571
+     Eval Accuracy:  0.2567
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3614
+     Eval Accuracy:  0.2633
+
+--- Testing on Dataset: rotated_5class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 1, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.5071
+     Eval Accuracy:  0.3067
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.6371
+     Eval Accuracy:  0.3133
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.6386
+     Eval Accuracy:  0.3100
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.3600
+     Eval Accuracy:  0.2733
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3243
+     Eval Accuracy:  0.2600
+
+--- Testing on Dataset: spirals_2class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.9086
+     Eval Accuracy:  0.6433
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.8529
+     Eval Accuracy:  0.4567
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7829
+     Eval Accuracy:  0.6100
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.5900
+     Eval Accuracy:  0.4867
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.5457
+     Eval Accuracy:  0.4800
+
+--- Testing on Dataset: spirals_3class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8571
+     Eval Accuracy:  0.4167
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.7671
+     Eval Accuracy:  0.3433
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7643
+     Eval Accuracy:  0.3833
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.4057
+     Eval Accuracy:  0.2900
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3757
+     Eval Accuracy:  0.3233
+
+--- Testing on Dataset: spirals_4class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8686
+     Eval Accuracy:  0.3100
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.7229
+     Eval Accuracy:  0.2333
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.6914
+     Eval Accuracy:  0.2867
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.3157
+     Eval Accuracy:  0.1733
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3071
+     Eval Accuracy:  0.2167
+
+--- Testing on Dataset: spirals_5class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 1000, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.9600
+     Eval Accuracy:  0.2267
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.6414
+     Eval Accuracy:  0.1800
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.5914
+     Eval Accuracy:  0.2100
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.2814
+     Eval Accuracy:  0.1367
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.2614
+     Eval Accuracy:  0.1733
+
+--- Testing on Dataset: wave_2class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8871
+     Eval Accuracy:  0.6967
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.8671
+     Eval Accuracy:  0.6933
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7714
+     Eval Accuracy:  0.6467
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.7929
+     Eval Accuracy:  0.6300
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.6186
+     Eval Accuracy:  0.5400
+
+--- Testing on Dataset: wave_3class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8671
+     Eval Accuracy:  0.4967
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.7857
+     Eval Accuracy:  0.4833
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7700
+     Eval Accuracy:  0.4833
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.7086
+     Eval Accuracy:  0.4033
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.4657
+     Eval Accuracy:  0.3500
+
+--- Testing on Dataset: wave_4class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8571
+     Eval Accuracy:  0.4700
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.7129
+     Eval Accuracy:  0.3867
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7457
+     Eval Accuracy:  0.4767
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.6286
+     Eval Accuracy:  0.3633
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3686
+     Eval Accuracy:  0.2867
+
+--- Testing on Dataset: wave_5class.csv ---
+  -> Evaluating Model: Tuned SVM (GridSearch)
+Starting grid search for optimal C and gamma...
+Grid search complete. Best parameters: {'C': 100, 'gamma': 10}
+Tuned SVM model trained with 700 samples.
+     Train Accuracy: 0.8771
+     Eval Accuracy:  0.3233
+  -> Evaluating Model: Random Forest
+Random Forest model trained with 700 samples.
+     Train Accuracy: 0.6800
+     Eval Accuracy:  0.3100
+  -> Evaluating Model: K-Nearest Neighbors
+KNN model 'trained' with 700 samples.
+     Train Accuracy: 0.7029
+     Eval Accuracy:  0.2700
+  -> Evaluating Model: Standard SVC
+SVMClassifier initialized with kernel=rbf, C=1.0, gamma=5.0
+SVM model fitted on 700 samples.
+     Train Accuracy: 0.6086
+     Eval Accuracy:  0.2333
+  -> Evaluating Model: Decision Tree
+     Train Accuracy: 0.3100
+     Eval Accuracy:  0.2167
+
+--- Tournament Complete ---
