@@ -179,7 +179,7 @@ def predict_one(node, x):
         node = node.branches.get(key, None)
         if node is None:
             break
-    return node.prediction if node else None
+    return int(node.prediction) if node else None
 
 def predict(node, X):
     return np.array([predict_one(node, row) for row in X])
@@ -189,7 +189,7 @@ def plot_tree(node, attr, depth=0):
     if depth==0:
         print("root")
     if node.is_leaf:
-        print(' | '*(depth) + " +-> " + "Predict:", node.prediction)
+        print(' | '*(depth) + " +-> " + "Predict:", int(node.prediction))
         return
     if node.threshold is not None:
         print(' | '*(depth) + " +-> " + node.feature + "<=" + str(node.threshold))
