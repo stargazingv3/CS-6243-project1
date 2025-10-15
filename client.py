@@ -40,10 +40,16 @@ def information_gain(y, splits):
     y_splits = [ [] for i in range(len(splits)) ]
     for i in range(len(splits)):
         for index in splits[i]:
-            y_splits[i].append(float(y[index]))
+            # MODIFIED: Removed float conversion to support string labels
+            y_splits[i].append(y[index])
+    
+    total_samples = sum([len(x) for x in y_splits])
+    if total_samples == 0:
+        return 0
+        
     children_entropy = 0
     for y_split in y_splits:
-        children_entropy += (len(y_split) / sum([len(x) for x in y_splits])) * entropy(y_split)
+        children_entropy += (len(y_split) / total_samples) * entropy(y_split)
 
     parent_entropy = entropy(y)
 
@@ -103,10 +109,10 @@ def best_split(X, y, split_features):
             splits = [[] for i in range(len(categories))]
             for i in range(len(col)):
                 splits[categories.index(col[i])].append(i)
+            info_gain = information_gain(y, splits)
         except Exception as e:
             print("got exception:", e)
 
-        info_gain = information_gain(y, splits)
         if info_gain > best_gain:
             best_gain = info_gain
             best_feature = AttributeNames[j]
@@ -153,7 +159,7 @@ def fit_tree(X, y, depth=0, max_depth=None, split_features=[]):
     # Todo: Create internal node and recurse for children
     node = Node(feature=feat, threshold=thr)
     DEBUG("RECURSION IS FUN!!! about to make node, and recurse on branches")
-    if thr:
+    if thr is not None:
         DEBUG("numerical data recursion")
         node.branches = {
             "<=": fit_tree(np.array([X[i] for i in splits[0]]), np.array([y[i] for i in splits[0]]), depth+1, max_depth, split_features),
@@ -179,7 +185,8 @@ def predict_one(node, x):
         node = node.branches.get(key, None)
         if node is None:
             break
-    return int(node.prediction) if node else None
+    # MODIFIED: Removed int() conversion to return original label type
+    return node.prediction if node else None
 
 def predict(node, X):
     return np.array([predict_one(node, row) for row in X])
@@ -189,7 +196,8 @@ def plot_tree(node, attr, depth=0):
     if depth==0:
         print("root")
     if node.is_leaf:
-        print(' | '*(depth) + " +-> " + "Predict:", int(node.prediction))
+        # MODIFIED: Handled potential non-numeric prediction for printing
+        print(' | '*(depth) + " +-> " + "Predict:", node.prediction)
         return
     if node.threshold is not None:
         print(' | '*(depth) + " +-> " + node.feature + "<=" + str(node.threshold))
@@ -352,7 +360,8 @@ class FederatedClient:
         )
 
         X_train = np.array(self.train_features)
-        y_train = np.array(self.train_labels).astype(float)
+        # MODIFIED: Removed .astype(float) to handle string labels
+        y_train = np.array(self.train_labels)
 
         num_features = X_train.shape[1]
         AttributeNames = np.array([f"feature_{i+1}" for i in range(num_features)])
@@ -366,11 +375,14 @@ class FederatedClient:
     def _predict(self, payload: Dict[str, object]) -> str:
         features_to_predict = payload.get("features")
 
-        if self.decision_tree_root != None:
+        prediction = None
+        if self.decision_tree_root is not None:
             prediction = predict_one(self.decision_tree_root, features_to_predict)
+        
+        if prediction is not None:
             return str(prediction)
         
-        print("WARNING!!! Looks like ur tree isn't trained. thats like, not great. maybe fix it. gonna just do my best ig...")
+        print("WARNING!!! Looks like ur tree isn't trained or failed to predict. maybe fix it. gonna just do my best ig...")
         return self.fallback_label if self.fallback_label else "unknown"
 
 
