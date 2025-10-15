@@ -160,10 +160,11 @@ def fit_tree(X, y, depth=0, max_depth=None, split_features=[]):
             ">":  fit_tree(np.array([X[i] for i in splits[1]]), np.array([y[i] for i in splits[1]]), depth+1, max_depth, split_features)
         }
     else:
-        DEBUG("categorical data recursion")
-        values = list(set(X[:,(AttributeNames.tolist().index(feat))]))
-        values.sort()
-        node.branches = {value: fit_tree(np.array([X[i] for i in splits[values.index(value)]]), np.array([y[i] for i in splits[values.index(value)]]), depth+1, max_depth, split_features+[feat]) for value in values}
+        pass # NO CATEGORICAL DATA IN TOURNAMENT
+        # DEBUG("categorical data recursion")
+        # values = list(set(X[:,(AttributeNames.tolist().index(feat))]))
+        # values.sort()
+        # node.branches = {value: fit_tree(np.array([X[i] for i in splits[values.index(value)]]), np.array([y[i] for i in splits[values.index(value)]]), depth+1, max_depth, split_features+[feat]) for value in values}
 
     return node
 
@@ -360,7 +361,7 @@ class FederatedClient:
 
         print("training tree with", len(X_train), "samples...")
 
-        self.decision_tree_root = fit_tree(X_train, y_train, max_depth=5)
+        self.decision_tree_root = fit_tree(X_train, y_train, max_depth=20)
 
     def _predict(self, payload: Dict[str, object]) -> str:
         features_to_predict = payload.get("features")
